@@ -4,16 +4,14 @@
 """cli
 
 usage:
-  cli.py sudo <pms> install <package> [--verbose]
-  cli.py <pms> install <package>
+  cli.py <pms> install <package> [--verbose]
   cli.py <pms> install <package> -s <filename> 
   cli.py --version
 
 options:
   -v --verbose      Show full output.
-  -a --all          Search vulnerabilities through all source (MITRE, OSS for now)
-  -o --oss          Search vulnerabilities through OSS
-  -m --mitre        Search vulnerabilities through MITRE
+  -o --oss          Search vulnerabilities only through OSS
+  -m --mitre        Search vulnerabilities only through MITRE
   -s --save         Save output to file
   -h --help         Show this screen.
 
@@ -42,7 +40,14 @@ def main():
     pms = utility_pms.get_pms_name()
     # package = utility_pms.get_package_name()
     
-    __verbose = arguments["--verbose"]
+    ############## CLI VAR ################
+    __verbose  = arguments["--verbose"]
+    __pms        = arguments["<pms>"]
+    __package    = arguments["<package>"]
+    __oss_mode   = arguments["--oss"]
+    __mitre_mode = arguments["--mitre"]
+    __save       = arguments["--save"] 
+
 
     if pms == 'apt' or pms == 'apt-get' : 
         deps = apt_scan.get_apt_dependencies()
@@ -74,7 +79,6 @@ def main():
         print("Your PMS is not supported for the moment")
         utility_pms.print_supported_pms()
     
-
 
 if __name__ == "__main__":
     main()

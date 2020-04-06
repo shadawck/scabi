@@ -17,7 +17,6 @@ def get_command():
 def get_package_name():
     return get_command()[-1].strip(' ')
 
-
 def get_supported_pms():
     return ['apt', 
             'apt-get', 
@@ -72,7 +71,6 @@ def run_command():
         
         return requests.get(url,stream=True).text # return json 
 
-    
     p = subprocess.run(commandToRun, stdout=subprocess.PIPE,  encoding="ascii")
     return p 
 

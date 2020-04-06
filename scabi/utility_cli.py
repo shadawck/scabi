@@ -25,7 +25,7 @@ def OSS_print_vulnerabiliies(listDependencies, __verbose ):
         
         else :
             print("\n-------------- Package: <" + listDependencies[i] + "> --------------", "\n")
-
+            
             i += 1
             for v in package : 
                 print( "title :"       , v[0])
@@ -39,7 +39,6 @@ def MITRE_print_vulnerabilites(listDependencies, __verbose):
     i = 0
 
     print("\n>>>>>>>>>>>>>>> SEARCH IN MITRE DATABASE <<<<<<<<<<<<<<<")
-
 
     for dep in listDependencies :
         list_vuln_by_dep = crawler.MITRE_get_main_page(dep)
