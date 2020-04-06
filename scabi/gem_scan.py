@@ -3,14 +3,13 @@ from collections import OrderedDict
 
 from scabi import utility_pms
 
-def get_gem_dependencies(): 
+def get_gem_dependencies(package): 
     """
     get list of dependencies from pms command
     """
     gemDependencies = []
     try:
-        package = utility_pms.get_command()[-1]
-        p = utility_pms.run_command()
+        p = utility_pms.run_command("gem", package)
 
         motif = p.stdout.split("\n")
 

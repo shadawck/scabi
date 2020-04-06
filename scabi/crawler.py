@@ -3,6 +3,7 @@ Get the vulnerabilities from different source (See docs/vuln-source.md) for each
 """
 import json
 import requests
+from bs4 import BeautifulSoup
 
 from scabi import utility_pms
 from scabi import pip_scan
@@ -25,15 +26,14 @@ def get_platform_for_eco():
     """
     pass
 
-def OSS_send_api_request(package):
+def OSS_send_api_request(pms_name,package):
 
     def construct_ecosystem():
-        pms = utility_pms.get_pms_name()
-        if pms == 'apt'         : eco = 'deb'
-        elif pms == 'composer'  : eco = 'composer'
-        elif pms == 'gem'       : eco = 'rubygem'
-        elif pms == 'npm'       : eco = 'npm'
-        elif pms == 'pip'       : eco = 'pypi'
+        if pms_name == 'apt'         : eco = 'deb'
+        elif pms_name == 'composer'  : eco = 'composer'
+        elif pms_name == 'gem'       : eco = 'rubygem'
+        elif pms_name == 'npm'       : eco = 'npm'
+        elif pms_name == 'pip'       : eco = 'pypi'
         else : 
             eco = ''
             print("PMS not supported for the moment")
@@ -49,34 +49,27 @@ def OSS_send_api_request(package):
     
     url = OSS_build_uri()
 
-
     headers = {'Authorization': 'token user:1c236b9c013d300d0f973f42d855692533535f2c',
                'accept':'application/vnd.ossindex.component-report.v1+json'
-              }
+    }
+
     rq = requests.get(url, headers=headers)
 
     # Exit if request return noting ( HTTP 429 )
     if rq.status_code != 200:
-        print('OSS Index : You have to wait a little: Too Many Request\n', rq.status_code)
+        print('OSS Index : You have to wait a little: Too Many Request. Status code : ', rq.status_code, "\n")
         exit()
     
     rq = rq.json()
-    #print(rq)
     return rq
 
-def OSS_parse_api_reponse(package):
-    resp = OSS_send_api_request(package)
+def OSS_parse_api_reponse(pms_name, package):
+    resp = OSS_send_api_request(pms_name,package)
     cve_list =  []
-
-
-    #print(package, resp["description"])
 
     # if package is unkown or don't have dependencies, just return an empty list 
     if resp["vulnerabilities"] == [] :
-        # DEBUG print("NOOOOOOOOOO VULN")
         return cve_list # list is empty
-    
-    
 
     for vuln in resp["vulnerabilities"]:
         cve_list.append(
@@ -90,11 +83,11 @@ def OSS_parse_api_reponse(package):
         )
     return cve_list
         
-def OSS_get_dep_vulerabilities(listPackage):
+def OSS_get_dep_vulerabilities(pms_name, listPackage):
     list_vuln_by_dep = []
 
     for dep in listPackage: 
-        list_vuln_by_dep.append(OSS_parse_api_reponse(dep))
+        list_vuln_by_dep.append(OSS_parse_api_reponse(pms_name,dep))
     
     return list_vuln_by_dep
 
@@ -107,8 +100,6 @@ def OSS_get_dep_vulerabilities(listPackage):
 # No API but you can download the source in differents format XML, CSV ... but these are heavy file 
 # It's more pratical to make little requests
 # So let's go make a litle API with beautifulsoup and requests
-
-from bs4 import BeautifulSoup
 
 
 def MITRE_get_main_page(package): 
@@ -192,6 +183,10 @@ def MITRE_get_cve_detail(package):
 # ABORTED : the api doesn't expose search by product. To search for a keyword (product) you need
 # the vendor name and the product name so you can't discover CVE just based on package
 # SOLUTION : Create a new API which parse the cve.circl.lu search page
+
+
+
+
 
 ############################
 ##### VULDB CVE source #####

@@ -4,13 +4,13 @@ import json
 
 from scabi import utility_pms
 
-def get_composer_dependencies(): 
+def get_composer_dependencies(package): 
     """
     get list of dependencies from composer command
     """
     composerDependencies = []
     try:
-        p = utility_pms.run_command()
+        p = utility_pms.run_command("composer", package)
 
         data = json.loads(p)["package"]["versions"]
         for x in data :
@@ -28,4 +28,11 @@ def get_composer_dependencies():
         print("Your Package Management System : is not supported")
         utility_pms.print_supported_pms()
         return []
+    except KeyError:
+        print("This package doesn't exist on packagist")
+    except json.decoder.JSONDecodeError:
+        # if data doesn't exist. At this moment composerDependencies = []
+        return []
 
+
+# IMPLEMENT EXCLUSION LIST to exclude enormous package like php

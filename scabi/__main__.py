@@ -4,7 +4,7 @@
 """cli
 
 usage:
-  cli.py <pms> install <package> [--verbose]
+  cli.py <pms> install <package> [--verbose ] [--oss | --mitre]
   cli.py <pms> install <package> -s <filename> 
   cli.py --version
 
@@ -36,9 +36,6 @@ def main():
 
     arguments = docopt(__doc__, version='scabi 1.0.1')
     print(arguments)
-
-    pms = utility_pms.get_pms_name()
-    # package = utility_pms.get_package_name()
     
     ############## CLI VAR ################
     __verbose  = arguments["--verbose"]
@@ -49,31 +46,37 @@ def main():
     __save       = arguments["--save"] 
 
 
-    if pms == 'apt' or pms == 'apt-get' : 
-        deps = apt_scan.get_apt_dependencies()
-        utility_cli.print_dependencies(deps)
-        utility_cli.OSS_print_vulnerabiliies(deps,__verbose)
-
-    elif pms == 'composer'  : 
-        deps = composer_scan.get_composer_dependencies()
-        utility_cli.print_dependencies(deps)
-        utility_cli.OSS_print_vulnerabiliies(deps,__verbose)
-
-    elif pms == 'gem'       : 
-        deps = gem_scan.get_gem_dependencies()
-        utility_cli.print_dependencies(deps)
-        utility_cli.OSS_print_vulnerabiliies(deps,__verbose)
-
-    elif pms == 'npm'       : 
-        deps = npm_scan.get_npm_dependencies()
-        utility_cli.print_dependencies(deps)
-        utility_cli.OSS_print_vulnerabiliies(deps,__verbose)
-
-    elif pms == 'pip'       : 
-        deps = pip_scan.get_pip_dependencies()
-        utility_cli.print_dependencies(deps)
-        utility_cli.OSS_print_vulnerabiliies(deps,__verbose)
+    if __pms == 'apt' or __pms == 'apt-get' : 
+        deps = apt_scan.get_apt_dependencies(__package)
+        utility_cli.print_dependencies(__package, deps)
+        utility_cli.OSS_print_vulnerabiliies(__pms, deps,__verbose)
         utility_cli.MITRE_print_vulnerabilites(deps,__verbose)
+
+    elif __pms == 'composer'  : 
+        deps = composer_scan.get_composer_dependencies(__package)
+        utility_cli.print_dependencies(__package, deps)
+        utility_cli.OSS_print_vulnerabiliies(__pms,deps,__verbose)
+        utility_cli.MITRE_print_vulnerabilites(deps[1:-1],__verbose)
+
+
+    elif __pms == 'gem'       : 
+        deps = gem_scan.get_gem_dependencies(__package)
+        utility_cli.print_dependencies(__package,deps)
+        utility_cli.MITRE_print_vulnerabilites(deps,__verbose)
+        utility_cli.OSS_print_vulnerabiliies(__pms,deps,__verbose)
+
+    elif __pms == 'npm'       : 
+        deps = npm_scan.get_npm_dependencies(__package)
+        utility_cli.print_dependencies(__package,deps)
+        utility_cli.MITRE_print_vulnerabilites(deps,__verbose)
+        utility_cli.OSS_print_vulnerabiliies(__pms,deps,__verbose)
+
+    elif __pms == 'pip'       : 
+        deps = pip_scan.get_pip_dependencies(__package)
+        utility_cli.print_dependencies(__package,deps)
+        utility_cli.MITRE_print_vulnerabilites(deps,__verbose)
+        utility_cli.OSS_print_vulnerabiliies(__pms,deps,__verbose)
+       
 
     else : 
         print("Your PMS is not supported for the moment")

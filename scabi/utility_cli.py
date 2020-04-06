@@ -2,14 +2,16 @@ from scabi import utility_pms
 from scabi import crawler
 
 
-def print_dependencies(listDependencies):
-    if listDependencies == [] : print("No dependencies found")
-    print("The dependencies for <" + utility_pms.get_package_name() + "> are :")
-    for dep in listDependencies : 
-        print("...", dep)
+def print_dependencies(package, listDependencies):
+    if listDependencies == [] :
+        print("Ne dependencies found")
+    else :
+        print("The dependencies for <" + package + "> are :")
+        for dep in listDependencies : 
+            print("...", dep)
 
-def OSS_print_vulnerabiliies(listDependencies, __verbose ):
-    list_vuln_by_dep = crawler.OSS_get_dep_vulerabilities(listDependencies)
+def OSS_print_vulnerabiliies(pms_name, listDependencies, __verbose ):
+    list_vuln_by_dep = crawler.OSS_get_dep_vulerabilities(pms_name, listDependencies)
     i = 0
 
     print("\n>>>>>>>>>>>>>>> SEARCH IN OSS INDEX <<<<<<<<<<<<<<<")
@@ -61,9 +63,6 @@ def MITRE_print_vulnerabilites(listDependencies, __verbose):
                 print("CVE DETAIL"  ,  cve[1]) # print cve_link
                 print("DESCRIPTION" ,  cve[2]) # print cve_description
                 print("\n")
-
-
-
 
         
 

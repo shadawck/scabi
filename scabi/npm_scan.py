@@ -4,27 +4,23 @@ import json
 
 from scabi import utility_pms
 
-def get_npm_dependencies(): 
+def get_npm_dependencies(package): 
     """
     get list of dependencies from pms command
     """
     npmDependencies = []
 
-    try:
-        p = utility_pms.run_command() # Json data
 
-        try:    
-            loaded_json = json.loads(p.stdout)
-            for word in loaded_json:
-            	npmDependencies.append(word)
-                
-        except json.decoder.JSONDecodeError:
-            print("No dependencies")
-
-        return npmDependencies
-        
-    except UnboundLocalError:
-        print("Your Package Management System : is not supported")
-        utility_pms.print_supported_pms()
+    p = utility_pms.run_command("npm",package) # Json data
+    try:    
+        loaded_json = json.loads(p.stdout)
+        for word in loaded_json:
+        	npmDependencies.append(word)
+            
+    except json.decoder.JSONDecodeError:
         return []
+    
+    return npmDependencies
+        
+
 
