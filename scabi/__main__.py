@@ -96,8 +96,9 @@ def main():
 
     ############### SAVE LOGIC ################
 
-    if __save_ext != 'txt' :
+    if __save and __save_ext != 'txt' :
         print("save format :", __save_ext, "not supported for the moment")
+
     sys.stdout.close()
 if __name__ == "__main__":
     main()

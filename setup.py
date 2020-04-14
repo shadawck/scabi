@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 setup(
     name="scabi",
     version="1.0.0",
-    description="Scan dependencies of given packages management install command and return their vulnerabilties",
+    description="Scan dependencies of given packages management system and return their vulnerabilties",
     long_description="README.md",
     long_description_content_type="text/markdown",
     url="https://github.com/fractalizer/scabi",
