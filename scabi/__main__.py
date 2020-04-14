@@ -56,7 +56,8 @@ def main():
 
     elif __pms == 'composer'  : 
         deps = getdep.get_composer_dependencies(__package)
-        deps = deps[1:-1]
+        if deps != None :
+            deps = deps[1:-1] # remove "php" from dependency list
 
     elif __pms == 'gem'       : 
         deps = getdep.get_gem_dependencies(__package)
