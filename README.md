@@ -1,6 +1,6 @@
 # Scabi  
 
-Scan dependencies of package from a specific package management system (pms) and return their vulnerabilities.
+Implement vulnerability scanning on top of package management system like apt, yarn, chocolatey... in command line
 
 # Install
 

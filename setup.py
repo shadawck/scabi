@@ -17,7 +17,7 @@ extras = {
 setup(
     name="scabi",
     version=__version__,
-    description="Scan dependencies of package from a specific package management system (pms) and return their vulnerabilties",
+    description="Implement vulnerability scanning on top of package management system like apt, yarn, chocolatey... in command line",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/remiflavien1/scabi",
