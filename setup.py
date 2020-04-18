@@ -17,7 +17,7 @@ extras = {
 setup(
     name="scabi",
     version=__version__,
-    description="Implement vulnerability scanning on top of package management system like apt, yarn, chocolatey... in command line",
+    description="Implement vulnerabilities scanning on top of package management system like apt, pip, composer...",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/remiflavien1/scabi",

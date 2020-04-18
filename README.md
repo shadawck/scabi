@@ -1,6 +1,6 @@
 # Scabi  
 
-Implement vulnerability scanning on top of package management system like apt, yarn, chocolatey... in command line
+Implement vulnerabilities scanning on top of package management system like apt, pip, composer...
 
 # Install
 
