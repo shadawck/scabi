@@ -4,7 +4,7 @@
 """Scabi
 
 Usage:
-  scabi <pms> install <package> [--verbose --detail ] [--oss  --mitre] [-s FILE]
+  scabi <pms> <package> [--verbose --detail ] [--oss  --mitre] [-s FILE]
   scabi -h --help --version
 
 Options:
@@ -35,7 +35,6 @@ def main():
     Implement CLI logic 
     """
     arguments = docopt(__doc__, version='scabi ' + __version__)
-    print(arguments)
     
     ############## CLI VAR ################
     __verbose    = arguments["--verbose"]
@@ -45,11 +44,14 @@ def main():
     __oss_mode   = arguments["--oss"]
     __mitre_mode = arguments["--mitre"]
     __save       = arguments["--save"] 
+
+    print("START CRAWLING...")
+
     if __save    :  
         __save_ext = __save.split(".")[0]
         sys.stdout=open(__save,"w")
 
-    print("START CRAWLING...")
+
 
     ############# CLI PMS SELECTION #######
     if __pms == 'apt' or __pms == 'apt-get' : 

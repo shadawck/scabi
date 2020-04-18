@@ -1,25 +1,66 @@
-# PMS SCAN
+# Scabi  
 
-Implement vulnerability scanning on top of package management system like apt, yarn, chocolatey... in command line 
+Scan dependencies of package from a specific package management system (pms) and return their vulnerabilities.
 
-Ex : this command will analyse all dpendencies of ```make``` and the ```make``` package in itself 
-```bash
-pms apt-get install make 
+# Install
+
+You can install ```scabi``` either via pip (PyPI) or from source.
+To install using pip:
+```sh
+python3 -m pip install scabi
+```
+Or manually:
+```
+git clone https://github.com/remiflavien1/scabi
+cd scabi
+python3 setup.py install
 ```
 
-### Apt 
+## CLI
+```
+Scabi
 
-Required : 
-```bash
-# list recursively all the dependencies of an apt package
-sudo apt install apt-rdepends
+Usage:
+  scabi <pms> <package> [--verbose --detail ] [--oss  --mitre] [-s FILE]
+  scabi -h --help --version
 
-``` 
-See ```apt_scan.py```
+Options:
+  -v --verbose      Show full output.
+  -d --detail       Show CVE details.
+  -o --oss          Search vulnerabilities only through OSS.
+  -m --mitre        Search vulnerabilities only through MITRE.
+  -s --save FILE    Save output to file.
+  -h --help         Show this screen.
+```
 
+Example of output for the python module ```django```:
 
-### Composer
+```sh
+$ scabi -v pip django
+```
 
-### Gem
+```
+The dependencies for <django> are :
+... pytz
+... sqlparse
+... asgiref
+... argon2-cffi
+... bcrypt
 
+>>>>>>>>>>>>>>> SEARCH IN OSS INDEX <<<<<<<<<<<<<<<
+NO VULNERABILITIES FOUND
 
+>>>>>>>>>>>>>>> SEARCH IN MITRE DATABASE <<<<<<<<<<<<<<<
+
+-------------- Package: <bcrypt> --------------
+
+CVE : CVE-2020-5229
+CVE DETAIL https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-5229
+DESCRIPTION Opencast before 8.1 stores passwords using the rather outdated and cryptographically insecure MD5 hash algorithm. ...
+
+CVE : CVE-2019-13421
+CVE DETAIL https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13421
+DESCRIPTION Search Guard versions before 23.1 had an issue that an administrative user is able to retrieve bcrypt password hashes of other users configured in the internal user database.
+...
+
+```

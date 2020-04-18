@@ -17,10 +17,10 @@ extras = {
 setup(
     name="scabi",
     version=__version__,
-    description="Scan dependencies of package fro a specific package management system (pms) and return their vulnerabilties",
+    description="Scan dependencies of package from a specific package management system (pms) and return their vulnerabilties",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/fractalizer/scabi",
+    url="https://github.com/remiflavien1/scabi",
     author="shadawck",
     author_email="hug211mire@gmail.com",
     license="MIT",

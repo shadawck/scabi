@@ -1,7 +1,7 @@
-files=awesome_check_link test *.py
-MODULE=awesome_check_link
+files=scabi test *.py
+MODULE=scabi
 test:
-	pytest -s -v test/test_*.py --doctest-modules --cov aclinks --cov-config=.coveragerc --cov-report term-missing
+	pytest -s -v test/test_*.py --doctest-modules --cov scabi --cov-config=.coveragerc --cov-report term-missing
 
 lint:
 	flake8 $(files)
@@ -15,7 +15,7 @@ install:
 report:
 	codecov
 
-build: aclinks
+build: scabi
 	rm -rf dist
 	python3 setup.py sdist bdist_wheel --bdist-dir ~/temp/bdistwheel
 
