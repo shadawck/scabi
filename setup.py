@@ -2,28 +2,39 @@ import pathlib
 from setuptools import setup
 from scabi import __version__
 
-# The directory containing this file
-HERE = pathlib.Path(__file__).parent
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
-# This call to setup() does all the work
+# test dependencies
+test_deps = [
+    'pytest',
+    'pytest-cov',
+]
+extras = {
+    'test': test_deps,
+}
+
 setup(
     name="scabi",
     version=__version__,
-    description="Scan dependencies of given packages management system and return their vulnerabilties",
-    long_description="README.md",
+    description="Scan dependencies of package fro a specific package management system (pms) and return their vulnerabilties",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/fractalizer/scabi",
-    author="Rémi HUGUET - fractalizer",
+    author="shadawck",
     author_email="hug211mire@gmail.com",
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
+        'Topic :: Security',
     ],
     packages=["scabi"],
-    include_package_data=True,
-    install_requires=["requests", "json", "shlex", "subprocess"],
+    install_requires=["requests", "mitrecve", "getdep", "docopt"],
+    tests_require=test_deps,
+    extras_require=extras,
+    keywords='security, dependencies, package management',
     entry_points={
         "console_scripts": [
             "scabi=scabi.__main__:main",

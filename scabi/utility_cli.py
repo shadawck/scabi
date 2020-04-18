@@ -1,6 +1,5 @@
 from scabi import crawler
 
-
 def print_dependencies(package, listDependencies):
     """Print dependencies of given package
 
@@ -52,4 +51,3 @@ def OSS_print_vulnerabiliies(pms_name, listDependencies, __verbose ):
                 print( "cve :"         , v[3])
                 print( "reference :"   , v[4])
                 print("\n")
-
