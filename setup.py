@@ -1,5 +1,6 @@
 import pathlib
 from setuptools import setup
+from scabi import __version__
 
 # The directory containing this file
 HERE = pathlib.Path(__file__).parent
@@ -7,7 +8,7 @@ HERE = pathlib.Path(__file__).parent
 # This call to setup() does all the work
 setup(
     name="scabi",
-    version="1.0.0",
+    version=__version__,
     description="Scan dependencies of given packages management system and return their vulnerabilties",
     long_description="README.md",
     long_description_content_type="text/markdown",

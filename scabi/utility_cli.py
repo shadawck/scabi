@@ -2,6 +2,14 @@ from scabi import crawler
 
 
 def print_dependencies(package, listDependencies):
+    """Print dependencies of given package
+
+    Args:
+        package (str): Name of the package choosen by the user.
+        listDependencies (list) : Dependencies list of "package" 
+
+    """
+
     if listDependencies == [] :
         print("No dependencies found")
     else :
@@ -10,6 +18,15 @@ def print_dependencies(package, listDependencies):
             print("...", dep)
 
 def OSS_print_vulnerabiliies(pms_name, listDependencies, __verbose ):
+    """Print vulnerabilities obtain from OSSIndex
+
+    Args:
+        pms_name (str) : Name of the package management system.
+        listDependencies (list) : List of dependencies of the package choosen by the user.
+        __verbose (bool) : Add detail on stdout.
+
+    """
+
     list_vuln_by_dep = crawler.OSS_get_dep_vulerabilities(pms_name, listDependencies)
     i = 0
 

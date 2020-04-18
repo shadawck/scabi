@@ -25,6 +25,16 @@ def get_platform_for_eco():
     pass
 
 def OSS_send_api_request(pms_name,package):
+    """Get vulnerabilities (CVE) of given package management system and package.
+
+    Args:
+        pms_name (str) : Name of the package management system.
+        package (str): Name of the package choosen by the user.
+
+    Return: 
+        dict. dict (json) of CVE for gievn input.
+
+    """
 
     def construct_ecosystem():
         if pms_name == 'apt'         : eco = 'deb'
@@ -62,6 +72,17 @@ def OSS_send_api_request(pms_name,package):
     return rq
 
 def OSS_parse_api_reponse(pms_name, package):
+    """Parse dict of OSS_send_api_request(pms_name, package)
+    
+    Args:
+        pms_name (str) : Name of the package management system.
+        package (str): Name of the package choosen by the user.
+
+    Return:
+        list. List of CVE for given package
+    
+    """
+    
     resp = OSS_send_api_request(pms_name,package)
     cve_list =  []
 
@@ -82,6 +103,19 @@ def OSS_parse_api_reponse(pms_name, package):
     return cve_list
         
 def OSS_get_dep_vulerabilities(pms_name, listPackage):
+    """
+    
+    Args:
+        pms_name (str) : Name of the package management system.
+        listPackage (list) : List of package (dependencies)
+
+    return:
+        list. List of cve for all the package from "listPackage"
+
+    """
+
+
+
     list_vuln_by_dep = []
 
     for dep in listPackage: 
@@ -98,10 +132,12 @@ def OSS_get_dep_vulerabilities(pms_name, listPackage):
 # the vendor name and the product name so you can't discover CVE just based on package
 # SOLUTION : Create a new API which parse the cve.circl.lu search page
 
-
+# TODO
 
 ############################
 ##### VULDB CVE source #####
 ############################
 # https://vuldb.com/?doc.api
 # https://vuldb.com/?search.advanced
+
+# TODO

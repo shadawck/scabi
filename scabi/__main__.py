@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # __main__.py
 
-"""Scabi 1.0.1
+"""Scabi
 
-usage:
+Usage:
   scabi <pms> install <package> [--verbose --detail ] [--oss  --mitre] [-s FILE]
-  scabi --version
+  scabi -h --help --version
 
-options:
+Options:
   -v --verbose      Show full output.
   -d --detail       Show CVE details.
   -o --oss          Search vulnerabilities only through OSS.
@@ -27,13 +27,14 @@ from mitrecve import utility as ucve
 
 from scabi import utility_cli
 from scabi import crawler
+from scabi import __version__
 
 
 def main():
     """
     Implement CLI logic 
     """
-    arguments = docopt(__doc__, version='scabi 1.0.1')
+    arguments = docopt(__doc__, version='scabi ' + __version__)
     print(arguments)
     
     ############## CLI VAR ################
