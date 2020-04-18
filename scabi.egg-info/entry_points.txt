@@ -1,3 +1,0 @@
-[console_scripts]
-scabi = scabi.__main__:main
-

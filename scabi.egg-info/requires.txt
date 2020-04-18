@@ -1,8 +1,0 @@
-requests
-mitrecve
-getdep
-docopt
-
-[test]
-pytest
-pytest-cov
