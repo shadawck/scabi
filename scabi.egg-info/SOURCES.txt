@@ -1,0 +1,12 @@
+README.md
+setup.py
+scabi/__init__.py
+scabi/__main__.py
+scabi/crawler.py
+scabi/utility_cli.py
+scabi.egg-info/PKG-INFO
+scabi.egg-info/SOURCES.txt
+scabi.egg-info/dependency_links.txt
+scabi.egg-info/entry_points.txt
+scabi.egg-info/requires.txt
+scabi.egg-info/top_level.txt
