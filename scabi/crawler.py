@@ -57,7 +57,7 @@ def OSS_send_api_request(pms_name,package):
     
     url = OSS_build_uri()
 
-    headers = {'Authorization': 'token user:1c236b9c013d300d0f973f42d855692533535f2c',
+    headers = {'Authorization': 'token user:7d1b2c92676d07f9a5a24fd6d4e175d64a4cba55',
                'accept':'application/vnd.ossindex.component-report.v1+json'
     }
 
